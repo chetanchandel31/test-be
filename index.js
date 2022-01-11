@@ -9,7 +9,7 @@ const userRoutes = require("./routes/user");
 const PORT = process.env.PORT || 8000;
 app.use("/api", userRoutes);
 
-console.log(process.env.SECRET);
+app.get("/", (req, res) => res.send("hello 👀"));
 
 // memories app method for connecting db seems better
 // mongoose
