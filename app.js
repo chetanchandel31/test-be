@@ -1,25 +1,19 @@
 // user model
 // how to link models
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
+require("dotenv").config();
 const express = require("express");
 const app = express();
+const userRoutes = require("./routes/user");
 
-const PORT = 8000; // change to process.env etc
+const PORT = process.env.PORT || 8000;
+app.use("/api", userRoutes);
 
-const admin = (req, res) => {
-  return res.send("hi from admin.");
-};
-
-const middleware = (req, res, next) => {
-  console.log("middleware ran");
-  next();
-};
-
-app.get("/admin", middleware, admin);
+console.log(process.env.SECRET);
 
 // memories app method for connecting db seems better
-mongoose
-  .connect("mongodb://localhost:27017/test")
-  .then(() => console.log("DB CONNECTED"));
+// mongoose
+//   .connect("mongodb://localhost:27017/test")
+//   .then(() => console.log("DB CONNECTED"));
 
 app.listen(PORT, () => console.log(`app running on port ${PORT}`));
